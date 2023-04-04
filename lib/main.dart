@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:taskmanager/ui/screens/login_screen.dart';
+import 'package:taskmanager/ui/screens/email_set_screen.dart';
+import 'package:taskmanager/ui/screens/pin_verification_screen.dart';
 
 void main() => runApp(const TaskManagerApp());
 
@@ -10,7 +11,7 @@ class TaskManagerApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: PINVerificationScreen(),
     );
   }
 }
