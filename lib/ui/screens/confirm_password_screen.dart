@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:taskmanager/ui/pages/enter_button.dart';
-import 'package:taskmanager/ui/pages/scrn_bg.dart';
-import 'package:taskmanager/ui/pages/text_styles.dart';
-import 'package:taskmanager/ui/screens/otp_screen.dart';
 import 'package:taskmanager/ui/screens/signup_screen.dart';
 
-class EmailSettingScreen extends StatefulWidget {
-  const EmailSettingScreen({super.key});
+import '../pages/enter_button.dart';
+import '../pages/scrn_bg.dart';
+import '../pages/text_styles.dart';
+import 'otp_screen.dart';
+
+class ConfirmPasswordScreeen extends StatefulWidget {
+  const ConfirmPasswordScreeen({super.key});
 
   @override
-  State<EmailSettingScreen> createState() => _EmailSettingScreenState();
+  State<ConfirmPasswordScreeen> createState() => _ConfirmPasswordScreeenState();
 }
 
-class _EmailSettingScreenState extends State<EmailSettingScreen> {
+class _ConfirmPasswordScreeenState extends State<ConfirmPasswordScreeen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,28 +28,33 @@ class _EmailSettingScreenState extends State<EmailSettingScreen> {
             children: [
               // text field
               Text(
-                "Your Email Address",
+                "Set Password",
                 style: GoogleFonts.ubuntu(
                     fontSize: 25, fontWeight: FontWeight.bold),
               ),
               Text(
-                "A 6 digit verification PIN will send to \nyour Email Address",
+                "Minimum length password 8 character with\nLetter & Number combination",
                 style: GoogleFonts.ubuntu(fontSize: 13, color: Colors.grey),
               ),
               const SizedBox(height: 40),
 
               TextFormWidget(
                 controller: TextEditingController(),
-                hintText: 'enter email address',
+                hintText: 'password',
+              ),
+              const SizedBox(height: 15),
+              TextFormWidget(
+                controller: TextEditingController(),
+                hintText: 'confirm password',
               ),
               const SizedBox(height: 15),
               EnterButton(
                   widget: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
-                      Text("Send Pin"),
+                      Text("Confirm"),
                       SizedBox(width: 20),
-                      Icon(Icons.arrow_circle_right_outlined)
+                      // Icon(Icons.confirmation_num_outlined)
                     ],
                   ),
                   onTap: () {
