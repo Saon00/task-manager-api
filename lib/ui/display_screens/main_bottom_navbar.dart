@@ -4,6 +4,8 @@ import 'package:taskmanager/ui/display_screens/completed_task_screen.dart';
 import 'package:taskmanager/ui/display_screens/new_task_screen%20copy.dart';
 import 'package:taskmanager/ui/display_screens/progress_task_screen%20copy%203.dart';
 
+import '../pages/user_profile_bar.dart';
+
 class MainBottomNavBar extends StatefulWidget {
   const MainBottomNavBar({super.key});
 
@@ -25,13 +27,15 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
-          selectedItemColor: Colors.greenAccent,
+          selectedItemColor: Colors.green,
           unselectedItemColor: Colors.black38,
           backgroundColor: Colors.white,
           showSelectedLabels: true,
           onTap: (index) {
             _selectedScreen = index;
-            setState(() {});
+            setState(() {
+              //  _selectedScreen = index;
+            });
           },
           elevation: 3,
           currentIndex: _selectedScreen,
@@ -44,7 +48,16 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
                 icon: Icon(Icons.cancel_outlined), label: "Cancelled"),
             BottomNavigationBarItem(icon: Icon(Icons.task), label: "Progress"),
           ]),
-      body: _screens[_selectedScreen],
+
+      // body page
+      body: SafeArea(
+        child: Column(
+          children: [
+            const UserProfileBar(),
+            Expanded(child: _screens[_selectedScreen]),
+          ],
+        ),
+      ),
     );
   }
 }
