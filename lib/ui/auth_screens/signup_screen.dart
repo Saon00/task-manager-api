@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:taskmanager/ui/pages/scrn_bg.dart';
-import 'package:taskmanager/ui/screens/login_screen.dart';
+import 'package:taskmanager/ui/auth_screens/login_screen.dart';
 
 import '../pages/enter_button.dart';
 import '../pages/text_styles.dart';

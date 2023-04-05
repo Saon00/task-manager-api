@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:taskmanager/ui/screens/signup_screen.dart';
+import 'package:taskmanager/ui/auth_screens/signup_screen.dart';
 
 import '../pages/enter_button.dart';
 import '../pages/scrn_bg.dart';

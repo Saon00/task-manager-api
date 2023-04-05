@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:taskmanager/ui/screens/login_screen.dart';
+import 'package:taskmanager/ui/pages/enter_button.dart';
+import 'package:taskmanager/ui/pages/scrn_bg.dart';
+import 'package:taskmanager/ui/pages/text_styles.dart';
+import 'package:taskmanager/ui/auth_screens/otp_screen.dart';
+import 'package:taskmanager/ui/auth_screens/signup_screen.dart';
 
-import '../pages/enter_button.dart';
-import '../pages/scrn_bg.dart';
-import '../pages/text_styles.dart';
-
-class PINVerificationScreen extends StatefulWidget {
-  const PINVerificationScreen({super.key});
+class EmailSettingScreen extends StatefulWidget {
+  const EmailSettingScreen({super.key});
 
   @override
-  State<PINVerificationScreen> createState() => _PINVerificationScreenState();
+  State<EmailSettingScreen> createState() => _EmailSettingScreenState();
 }
 
-class _PINVerificationScreenState extends State<PINVerificationScreen> {
+class _EmailSettingScreenState extends State<EmailSettingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,9 +51,15 @@ class _PINVerificationScreenState extends State<PINVerificationScreen> {
                       Icon(Icons.arrow_circle_right_outlined)
                     ],
                   ),
-                  onTap: () {}),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const OTPScreen()));
+                  }),
               const SizedBox(height: 40),
-              // don't have any account?
+
+              // have any account?
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -63,13 +69,13 @@ class _PINVerificationScreenState extends State<PINVerificationScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const LoginScreen()));
+                                builder: (context) => const SignUpScreen()));
                       },
                       style: TextButton.styleFrom(
                           foregroundColor: Colors.green,
                           padding: EdgeInsets.zero,
                           textStyle: GoogleFonts.quicksand()),
-                      child: const Text("Sign Up")),
+                      child: const Text("Sign up")),
                 ],
               )
             ],
