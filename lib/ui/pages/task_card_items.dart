@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 class TaskCardItems extends StatelessWidget {
   final String subject, description, date, taskType;
   final VoidCallback onEditPress, onDeletePress;
+  final Color color;
 
   const TaskCardItems({
     super.key,
@@ -13,6 +14,7 @@ class TaskCardItems extends StatelessWidget {
     required this.taskType,
     required this.onEditPress,
     required this.onDeletePress,
+    required this.color,
   });
 
   @override
@@ -38,7 +40,7 @@ class TaskCardItems extends StatelessWidget {
                 Chip(
                   label: Text(taskType),
                   labelStyle: GoogleFonts.ubuntu(color: Colors.white),
-                  backgroundColor: Colors.blue.shade300,
+                  backgroundColor: color,
                 ),
                 const Spacer(),
                 IconButton(

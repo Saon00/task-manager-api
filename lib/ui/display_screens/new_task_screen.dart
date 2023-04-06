@@ -43,6 +43,7 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
                     date: '12-04-2023',
                     onEditPress: () {},
                     onDeletePress: () {},
+                    color: Colors.blue,
                   );
                 }),
           )
