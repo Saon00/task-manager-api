@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:taskmanager/ui/display_screens/cancelled_task_screen%20copy%202.dart';
+import 'package:taskmanager/ui/display_screens/cancelled_task_screen.dart';
 import 'package:taskmanager/ui/display_screens/completed_task_screen.dart';
-import 'package:taskmanager/ui/display_screens/new_task_screen%20copy.dart';
-import 'package:taskmanager/ui/display_screens/progress_task_screen%20copy%203.dart';
+import 'package:taskmanager/ui/display_screens/new_task_screen.dart';
+import 'package:taskmanager/ui/display_screens/progress_task_screen.dart';
 
 import '../pages/user_profile_bar.dart';
 

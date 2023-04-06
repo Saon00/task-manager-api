@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:taskmanager/ui/pages/scrn_bg.dart';
 
 import '../pages/dashboard_item.dart';
+import '../pages/task_card_items.dart';
 
 class NewTaskScreen extends StatefulWidget {
   const NewTaskScreen({super.key});
@@ -27,6 +28,24 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
                 child:
                     DashboardItem(numberOfTask: 11, taskType: 'In Progress')),
           ]),
+
+          // task body
+          Expanded(
+            child: ListView.builder(
+                itemCount: 10,
+                itemBuilder: (context, index) {
+                  return // task items
+                      TaskCardItems(
+                    subject: '01',
+                    description:
+                        'lkdja aldj alw dija dlajd lawjd ialj dilajdiwj',
+                    taskType: 'new',
+                    date: '12-04-2023',
+                    onEditPress: () {},
+                    onDeletePress: () {},
+                  );
+                }),
+          )
         ]),
       ),
     );
