@@ -12,7 +12,7 @@ class ScreenBG extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           Image.asset(
-            'assets/images/bg.png',
+            'assets/images/Clouds.png',
             fit: BoxFit.fill,
             width: scrnSize.width,
             height: scrnSize.height,

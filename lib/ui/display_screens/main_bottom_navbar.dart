@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taskmanager/ui/display_screens/add_new_task_screen.dart';
 import 'package:taskmanager/ui/display_screens/cancelled_task_screen.dart';
 import 'package:taskmanager/ui/display_screens/completed_task_screen.dart';
 import 'package:taskmanager/ui/display_screens/new_task_screen.dart';
@@ -26,6 +27,7 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //bottom nav bar
       bottomNavigationBar: BottomNavigationBar(
           selectedItemColor: Colors.green,
           unselectedItemColor: Colors.black38,
@@ -48,6 +50,18 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
                 icon: Icon(Icons.cancel_outlined), label: "Cancelled"),
             BottomNavigationBarItem(icon: Icon(Icons.task), label: "Progress"),
           ]),
+
+// floating action button
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const AddNewTaskScreen()));
+        },
+        backgroundColor: Colors.green,
+        child: const Icon(Icons.add),
+      ),
 
       // body page
       body: SafeArea(

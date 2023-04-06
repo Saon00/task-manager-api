@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:taskmanager/ui/display_screens/update_profile_screen.dart';
 
 class UserProfileBar extends StatelessWidget {
   const UserProfileBar({
@@ -9,6 +10,12 @@ class UserProfileBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const UpdateProfileScreen()));
+      },
       leading: CircleAvatar(
           maxRadius: 20,
           child: Image.network(
