@@ -35,7 +35,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           fontSize: 30, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 15),
                   InkWell(
-                    onTap: (){},
+                    onTap: () {},
                     child: Row(
                       children: [
                         Container(
@@ -57,7 +57,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                   topRight: Radius.circular(10),
                                   bottomRight: Radius.circular(10),
                                 )),
-                            child: const Text("--"),
+                            child: const Text(""),
                           ),
                         ),
                       ],
