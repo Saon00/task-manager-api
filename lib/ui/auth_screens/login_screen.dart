@@ -23,6 +23,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  bool _inProgress = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,36 +72,46 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 15),
 
-              // login button
-              EnterButton(
-                onTap: () async {
-                  if (_formKey.currentState!.validate()) {
-                    final result =
-                        await NetWorkUtils.postMethod(Urls.loginUrl, body: {
-                      'email': _emailController.text.trim(),
-                      'password': _passwordController.text,
-                    }, onUnAuthorize: () {
-                      showSnackBarMessage(
-                          context, "email or password incorrect", true);
-                    });
-                    if (result != null && result['status'] == 'success') {
-                      Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const MainBottomNavBar()),
-                          (route) => false);
+              // circular progress indicator
+              if (_inProgress)
+                const Center(
+                  child: CircularProgressIndicator(color: Colors.green),
+                )
+              else
+                // login button
+                EnterButton(
+                  onTap: () async {
+                    if (_formKey.currentState!.validate()) {
+                      _inProgress = true;
+                      setState(() {});
+                      final result =
+                          await NetWorkUtils.postMethod(Urls.loginUrl, body: {
+                        'email': _emailController.text.trim(),
+                        'password': _passwordController.text,
+                      }, onUnAuthorize: () {
+                        showSnackBarMessage(
+                            context, "email or password incorrect", true);
+                      });
+                      _inProgress = false;
+                      setState(() {});
+                      if (result != null && result['status'] == 'success') {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const MainBottomNavBar()),
+                            (route) => false);
+                      }
                     }
-                  }
-                },
-                widget: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Text("Login"),
-                    SizedBox(width: 20),
-                    Icon(Icons.arrow_circle_right_outlined)
-                  ],
+                  },
+                  widget: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Text("Login"),
+                      SizedBox(width: 20),
+                      Icon(Icons.arrow_circle_right_outlined)
+                    ],
+                  ),
                 ),
-              ),
               const SizedBox(height: 40),
 
               // forgot button

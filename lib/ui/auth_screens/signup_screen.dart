@@ -25,6 +25,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  bool _inProgress = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,44 +111,59 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     const SizedBox(height: 15),
 
-                    // sign up button
-                    EnterButton(
-                        widget: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            Text("Sign Up"),
-                            SizedBox(width: 20),
-                            Icon(Icons.arrow_circle_right_outlined)
-                          ],
+                    // circular progress bar
+                    if (_inProgress)
+                      const Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.green,
                         ),
-                        onTap: () async {
-                          if (_formKey.currentState!.validate()) {
-                            final result = await NetWorkUtils.postMethod(
-                                // 'https://task.teamrabbil.com/api/v1/registration',
-                                Urls.registrationUrl,
-                                body: {
-                                  'email': emailController.text.trim(),
-                                  'firstName': firstNameController.text.trim(),
-                                  'lastName': lastNameController.text.trim(),
-                                  'mobile': mobileController.text.trim(),
-                                  'password': passwordController.text,
-                                });
-                            // print(result);
-                            if (result != null &&
-                                result['status'] == 'success') {
-                              emailController.clear();
-                              firstNameController.clear();
-                              lastNameController.clear();
-                              mobileController.clear();
-                              passwordController.clear();
-                              showSnackBarMessage(
-                                  context, "Registration Successful..");
-                            } else {
-                              showSnackBarMessage(
-                                  context, "Registration FAILED!!", true);
+                      )
+                    else
+                      // sign up button
+                      EnterButton(
+                          widget: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Text("Sign Up"),
+                              SizedBox(width: 20),
+                              Icon(Icons.arrow_circle_right_outlined)
+                            ],
+                          ),
+                          onTap: () async {
+                            if (_formKey.currentState!.validate()) {
+                              _inProgress = true;
+                              setState(() {
+                                
+                              });
+                              final result = await NetWorkUtils.postMethod(
+                                  // 'https://task.teamrabbil.com/api/v1/registration',
+                                  Urls.registrationUrl,
+                                  body: {
+                                    'email': emailController.text.trim(),
+                                    'firstName':
+                                        firstNameController.text.trim(),
+                                    'lastName': lastNameController.text.trim(),
+                                    'mobile': mobileController.text.trim(),
+                                    'password': passwordController.text,
+                                  });
+                                  _inProgress = false;
+                              setState(() {});
+                              // print(result);
+                              if (result != null &&
+                                  result['status'] == 'success') {
+                                emailController.clear();
+                                firstNameController.clear();
+                                lastNameController.clear();
+                                mobileController.clear();
+                                passwordController.clear();
+                                showSnackBarMessage(
+                                    context, "Registration Successful..");
+                              } else {
+                                showSnackBarMessage(
+                                    context, "Registration FAILED!!", true);
+                              }
                             }
-                          }
-                        }),
+                          }),
 
                     const SizedBox(height: 40),
 
