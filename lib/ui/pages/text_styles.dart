@@ -6,18 +6,25 @@ class TextFormWidget extends StatelessWidget {
   final TextEditingController controller;
   final bool? obsecureText;
   final int? maxlines;
+  final Function(String?)? validator;
 
   const TextFormWidget({
     super.key,
     required this.hintText,
     required this.controller,
     this.obsecureText,
-    this.maxlines,
+    this.maxlines, this.validator,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      validator: (value) {
+        if (validator != null) {
+         return validator!(value);
+        }
+        return null;
+      },
       maxLines: maxlines ?? 1,
       controller: controller,
       obscureText: obsecureText ?? false,

@@ -14,6 +14,14 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
+  final TextEditingController mobileController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,82 +30,120 @@ class _SignUpScreenState extends State<SignUpScreen> {
           child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(24),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // text field
-                  Text(
-                    "Join with us",
-                    style: GoogleFonts.ubuntu(
-                        fontSize: 25, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 15),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // text field
+                    Text(
+                      "Join with us",
+                      style: GoogleFonts.ubuntu(
+                          fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 15),
 
-                  //email name
-                  TextFormWidget(
-                    controller: TextEditingController(),
-                    hintText: 'email',
-                  ),
-                  const SizedBox(height: 15),
-                  //first name
-                  TextFormWidget(
-                    controller: TextEditingController(),
-                    hintText: 'first name',
-                  ),
-                  const SizedBox(height: 15),
-                  //last name
-                  TextFormWidget(
-                    controller: TextEditingController(),
-                    hintText: 'last name',
-                  ),
-                  const SizedBox(height: 15),
-                  //mobile
-                  TextFormWidget(
-                    controller: TextEditingController(),
-                    hintText: 'mobile',
-                  ),
-                  const SizedBox(height: 15),
-                  //password
-                  TextFormWidget(
-                    controller: TextEditingController(),
-                    hintText: 'password',
-                  ),
-                  const SizedBox(height: 15),
+                    //email name
+                    TextFormWidget(
+                      controller: emailController,
+                      validator: (value) {
+                        if (value?.isEmpty ?? true) {
+                          return "enter your Email";
+                        }
+                        return null;
+                      },
+                      hintText: 'email',
+                    ),
+                    const SizedBox(height: 15),
+                    //first name
+                    TextFormWidget(
+                      controller: firstNameController,
+                      validator: (value) {
+                        if (value?.isEmpty ?? true) {
+                          return "enter your First Name";
+                        }
+                        return null;
+                      },
+                      hintText: 'first name',
+                    ),
+                    const SizedBox(height: 15),
+                    //last name
+                    TextFormWidget(
+                      controller: lastNameController,
+                      validator: (value) {
+                        if (value?.isEmpty ?? true) {
+                          return "enter your Last Name";
+                        }
+                        return null;
+                      },
+                      hintText: 'last name',
+                    ),
+                    const SizedBox(height: 15),
+                    //mobile
+                    TextFormWidget(
+                      controller: mobileController,
+                      validator: (value) {
+                        if (value?.isEmpty ?? true) {
+                          return "enter your Mobile Number";
+                        }
+                        return null;
+                      },
+                      hintText: 'mobile',
+                    ),
+                    const SizedBox(height: 15),
+                    //password
+                    TextFormWidget(
+                      controller: passwordController,
+                      validator: (value) {
+                        if ((value?.isEmpty ?? true) &&
+                            ((value?.length ?? 0) < 6)) {
+                          return "enter your Password & more than 6 digits";
+                        }
+                        return null;
+                      },
+                      hintText: 'password',
+                    ),
+                    const SizedBox(height: 15),
 
-                  // sign up button
-                  EnterButton(
-                      widget: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Text("Sign Up"),
-                          SizedBox(width: 20),
-                          Icon(Icons.arrow_circle_right_outlined)
-                        ],
-                      ),
-                      onTap: () {}),
+                    // sign up button
+                    EnterButton(
+                        widget: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            Text("Sign Up"),
+                            SizedBox(width: 20),
+                            Icon(Icons.arrow_circle_right_outlined)
+                          ],
+                        ),
+                        onTap: () {
+                          if (_formKey.currentState!.validate()) {}
+                        }),
 
-                  const SizedBox(height: 40),
+                    const SizedBox(height: 40),
 
-                  // don't have any account?
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("Have an account?", style: GoogleFonts.quicksand()),
-                      TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const LoginScreen()));
-                          },
-                          style: TextButton.styleFrom(
-                              foregroundColor: Colors.green,
-                              padding: EdgeInsets.zero,
-                              textStyle: GoogleFonts.quicksand()),
-                          child: const Text("Log In")),
-                    ],
-                  )
-                ],
+                    // don't have any account?
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Have an account?",
+                            style: GoogleFonts.quicksand()),
+                        TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const LoginScreen()));
+                            },
+                            style: TextButton.styleFrom(
+                                foregroundColor: Colors.green,
+                                padding: EdgeInsets.zero,
+                                textStyle: GoogleFonts.quicksand()),
+                            child: const Text("Log In")),
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
           ),
