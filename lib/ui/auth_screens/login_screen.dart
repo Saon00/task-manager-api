@@ -6,6 +6,7 @@ import 'package:taskmanager/ui/pages/scrn_bg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:taskmanager/ui/auth_screens/email_set_screen.dart';
 import 'package:taskmanager/ui/auth_screens/signup_screen.dart';
+import 'package:taskmanager/ui/pages/snackBar_msg.dart';
 
 import '../pages/enter_button.dart';
 import '../pages/text_styles.dart';
@@ -77,6 +78,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         await NetWorkUtils.postMethod(Urls.loginUrl, body: {
                       'email': _emailController.text.trim(),
                       'password': _passwordController.text,
+                    }, onUnAuthorize: () {
+                      showSnackBarMessage(
+                          context, "email or password incorrect", true);
                     });
                     if (result != null && result['status'] == 'success') {
                       Navigator.pushAndRemoveUntil(
