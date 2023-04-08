@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:taskmanager/data/netwok_utils.dart';
 import 'package:taskmanager/ui/pages/scrn_bg.dart';
 import 'package:taskmanager/ui/auth_screens/login_screen.dart';
 
 import '../pages/enter_button.dart';
+import '../pages/snackBar_msg.dart';
 import '../pages/text_styles.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -93,11 +95,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     const SizedBox(height: 15),
                     //password
                     TextFormWidget(
+                      obsecureText: true,
                       controller: passwordController,
                       validator: (value) {
                         if ((value?.isEmpty ?? true) &&
                             ((value?.length ?? 0) < 6)) {
-                          return "enter your Password & more than 6 digits";
+                          return "enter your Password more than 6 digits";
                         }
                         return null;
                       },
@@ -115,8 +118,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             Icon(Icons.arrow_circle_right_outlined)
                           ],
                         ),
-                        onTap: () {
-                          if (_formKey.currentState!.validate()) {}
+                        onTap: () async {
+                          if (_formKey.currentState!.validate()) {
+                            final result = await NetWorkUtils.postMethod(
+                                'https://task.teamrabbil.com/api/v1/registration',
+                                body: {
+                                  'email': emailController.text.trim(),
+                                  'firstName': firstNameController.text.trim(),
+                                  'lastName': lastNameController.text.trim(),
+                                  'mobile': mobileController.text.trim(),
+                                  'password': passwordController.text,
+                                });
+                            // print(result);
+                            if (result != null &&
+                                result['status'] == 'success') {
+                              showSnackBarMessage(
+                                  context, "Registration Successful..");
+                            } else {
+                              showSnackBarMessage(
+                                  context, "Registration FAILED!!", true);
+                            }
+                          }
                         }),
 
                     const SizedBox(height: 40),

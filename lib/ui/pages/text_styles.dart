@@ -13,7 +13,8 @@ class TextFormWidget extends StatelessWidget {
     required this.hintText,
     required this.controller,
     this.obsecureText,
-    this.maxlines, this.validator,
+    this.maxlines,
+    this.validator,
   });
 
   @override
@@ -21,7 +22,7 @@ class TextFormWidget extends StatelessWidget {
     return TextFormField(
       validator: (value) {
         if (validator != null) {
-         return validator!(value);
+          return validator!(value);
         }
         return null;
       },

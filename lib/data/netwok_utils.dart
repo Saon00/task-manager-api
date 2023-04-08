@@ -20,7 +20,9 @@ class NetWorkUtils {
     }
   }
 
-  static Future<dynamic> postMethod(String url, {Map<String, String>? body}) async {
+// post request
+  static Future<dynamic> postMethod(String url,
+      {Map<String, String>? body}) async {
     try {
       final http.Response response = await http.post(Uri.parse(url),
           headers: {"Content-Type": "application/json"},
@@ -31,7 +33,7 @@ class NetWorkUtils {
       } else if (response.statusCode == 401) {
         print("UnAuthorized");
       } else {
-        print("Something went wrong!!");
+        print("Something went wrong!! ${response.statusCode}");
       }
     } catch (e) {
       print(e);
