@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:taskmanager/ui/auth_screens/signup_screen.dart';
+import 'package:taskmanager/ui/auth_screens/login_screen.dart';
 
 void main() => runApp(const TaskManagerApp());
 
@@ -10,7 +10,7 @@ class TaskManagerApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SignUpScreen(),
+      home: LoginScreen(),
     );
   }
 }

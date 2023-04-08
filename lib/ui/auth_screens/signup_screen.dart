@@ -4,6 +4,7 @@ import 'package:taskmanager/data/netwok_utils.dart';
 import 'package:taskmanager/ui/pages/scrn_bg.dart';
 import 'package:taskmanager/ui/auth_screens/login_screen.dart';
 
+import '../../data/urls.dart';
 import '../pages/enter_button.dart';
 import '../pages/snackBar_msg.dart';
 import '../pages/text_styles.dart';
@@ -121,7 +122,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         onTap: () async {
                           if (_formKey.currentState!.validate()) {
                             final result = await NetWorkUtils.postMethod(
-                                'https://task.teamrabbil.com/api/v1/registration',
+                                // 'https://task.teamrabbil.com/api/v1/registration',
+                                Urls.registrationUrl,
                                 body: {
                                   'email': emailController.text.trim(),
                                   'firstName': firstNameController.text.trim(),
