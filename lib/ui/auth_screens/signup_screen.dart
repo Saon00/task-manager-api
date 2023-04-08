@@ -132,6 +132,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             // print(result);
                             if (result != null &&
                                 result['status'] == 'success') {
+                              emailController.clear();
+                              firstNameController.clear();
+                              lastNameController.clear();
+                              mobileController.clear();
+                              passwordController.clear();
                               showSnackBarMessage(
                                   context, "Registration Successful..");
                             } else {
