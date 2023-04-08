@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taskmanager/data/auth_utils.dart';
 import 'package:taskmanager/data/netwok_utils.dart';
 import 'package:taskmanager/data/urls.dart';
 import 'package:taskmanager/ui/display_screens/main_bottom_navbar.dart';
@@ -24,6 +25,33 @@ class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   bool _inProgress = false;
+
+  Future<void> _login() async {
+    _inProgress = true;
+    setState(() {});
+    final result = await NetWorkUtils.postMethod(Urls.loginUrl, body: {
+      'email': _emailController.text.trim(),
+      'password': _passwordController.text,
+    }, onUnAuthorize: () {
+      showSnackBarMessage(context, "email or password incorrect", true);
+    });
+    _inProgress = false;
+    setState(() {});
+    if (result != null && result['status'] == 'success') {
+      await AuthUtils.saveUserData(
+          result['data']['firstName'],
+          result['data']['lastName'],
+          result['token'],
+          result['data']['mobile'],
+          result['data']['photo'],
+          result['data']['email']);
+
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const MainBottomNavBar()),
+          (route) => false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,25 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 EnterButton(
                   onTap: () async {
                     if (_formKey.currentState!.validate()) {
-                      _inProgress = true;
-                      setState(() {});
-                      final result =
-                          await NetWorkUtils.postMethod(Urls.loginUrl, body: {
-                        'email': _emailController.text.trim(),
-                        'password': _passwordController.text,
-                      }, onUnAuthorize: () {
-                        showSnackBarMessage(
-                            context, "email or password incorrect", true);
-                      });
-                      _inProgress = false;
-                      setState(() {});
-                      if (result != null && result['status'] == 'success') {
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const MainBottomNavBar()),
-                            (route) => false);
-                      }
+                      _login();
                     }
                   },
                   widget: Row(

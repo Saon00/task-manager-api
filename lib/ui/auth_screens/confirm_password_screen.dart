@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:taskmanager/ui/auth_screens/login_screen.dart';
 import 'package:taskmanager/ui/auth_screens/signup_screen.dart';
 
 import '../pages/enter_button.dart';
 import '../pages/scrn_bg.dart';
 import '../pages/text_styles.dart';
-import 'otp_screen.dart';
 
 class ConfirmPasswordScreeen extends StatefulWidget {
   const ConfirmPasswordScreeen({super.key});
@@ -58,10 +58,11 @@ class _ConfirmPasswordScreeenState extends State<ConfirmPasswordScreeen> {
                     ],
                   ),
                   onTap: () {
-                    Navigator.push(
+                    Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const OTPScreen()));
+                            builder: (context) => const LoginScreen()),
+                        (route) => false);
                   }),
               const SizedBox(height: 40),
 

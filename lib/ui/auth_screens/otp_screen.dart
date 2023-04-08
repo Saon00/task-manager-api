@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:taskmanager/ui/auth_screens/confirm_password_screen.dart';
 import 'package:taskmanager/ui/pages/scrn_bg.dart';
 import 'package:taskmanager/ui/auth_screens/login_screen.dart';
 
@@ -89,7 +90,13 @@ class _OTPScreenState extends State<OTPScreen> {
                         // Icon(Icons.arrow_circle_right_outlined)
                       ],
                     ),
-                    onTap: () {}),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const ConfirmPasswordScreeen()));
+                    }),
 
                 const SizedBox(height: 40),
                 // have any account?
