@@ -1,7 +1,12 @@
 import 'dart:convert';
+import 'dart:developer';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:taskmanager/data/auth_utils.dart';
+import 'package:taskmanager/main.dart';
+import 'package:taskmanager/ui/auth_screens/login_screen.dart';
 
 class NetWorkUtils {
   // get request
@@ -15,12 +20,14 @@ class NetWorkUtils {
       } else if (response.statusCode == 401) {
         if (onUnAuthorize != null) {
           onUnAuthorize();
+        }else{
+          moveToLoginScreen();
         }
       } else {
-        print("Something went wrong!!");
+        log("Something went wrong!!");
       }
     } catch (e) {
-      print(e);
+      log("$e");
     }
   }
 
@@ -29,7 +36,6 @@ class NetWorkUtils {
       {Map<String, String>? body,
       VoidCallback? onUnAuthorize,
       String? token}) async {
-
     try {
       final http.Response response = await http.post(Uri.parse(url),
           headers: {"Content-Type": "application/json", 'token': token ?? ""},
@@ -42,12 +48,24 @@ class NetWorkUtils {
       } else if (response.statusCode == 401) {
         if (onUnAuthorize != null) {
           onUnAuthorize();
-        }
+        } else {moveToLoginScreen();}
       } else {
-        print("Something went wrong!! ${response.statusCode}");
+        if (kDebugMode) {
+          print("Something went wrong!! ${response.statusCode}");
+        }
       }
     } catch (e) {
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
     }
+  }
+
+ static void moveToLoginScreen() async{
+   await AuthUtils.clearData();
+    Navigator.pushAndRemoveUntil(
+        TaskManagerApp.globalKey.currentContext!,
+        MaterialPageRoute(builder: (context) => LoginScreen()),
+        (route) => false);
   }
 }
