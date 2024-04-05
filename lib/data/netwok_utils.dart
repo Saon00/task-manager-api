@@ -11,9 +11,11 @@ import 'package:taskmanager/ui/auth_screens/login_screen.dart';
 class NetWorkUtils {
   // get request
   static Future<dynamic> getMethod(String url,
-      {VoidCallback? onUnAuthorize}) async {
+      {VoidCallback? onUnAuthorize,String? token}) async {
     try {
-      final http.Response response = await http.get(Uri.parse(url));
+      final http.Response response = await http.get(Uri.parse(url),
+        headers: {"Content-Type": "application/json", 'token': AuthUtils.token ?? ""},
+      );
 
       if (response.statusCode == 200) {
         return jsonDecode(response.body);
@@ -38,7 +40,7 @@ class NetWorkUtils {
       String? token}) async {
     try {
       final http.Response response = await http.post(Uri.parse(url),
-          headers: {"Content-Type": "application/json", 'token': token ?? ""},
+          headers: {"Content-Type": "application/json", 'token': AuthUtils.token ?? ""},
           body: jsonEncode(body));
 
       // print(response.body);
