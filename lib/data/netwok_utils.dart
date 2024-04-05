@@ -26,11 +26,16 @@ class NetWorkUtils {
 
 // post request
   static Future<dynamic> postMethod(String url,
-      {Map<String, String>? body, VoidCallback? onUnAuthorize}) async {
+      {Map<String, String>? body,
+      VoidCallback? onUnAuthorize,
+      String? token}) async {
+
     try {
       final http.Response response = await http.post(Uri.parse(url),
-          headers: {"Content-Type": "application/json"},
+          headers: {"Content-Type": "application/json", 'token': token ?? ""},
           body: jsonEncode(body));
+
+      // print(response.body);
 
       if (response.statusCode == 200) {
         return jsonDecode(response.body);
