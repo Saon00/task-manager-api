@@ -121,9 +121,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     else
                       // sign up button
                       EnterButton(
-                          widget: Row(
+                          widget: const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
+                            children:  [
                               Text("Sign Up"),
                               SizedBox(width: 20),
                               Icon(Icons.arrow_circle_right_outlined)

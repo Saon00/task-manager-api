@@ -13,6 +13,11 @@ class AddNewTaskScreen extends StatefulWidget {
 }
 
 class _AddNewTaskScreenState extends State<AddNewTaskScreen> {
+
+ final TextEditingController _subjectController = TextEditingController();
+ final TextEditingController _descriptionController = TextEditingController();
+ final GlobalKey<FormState> _key = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
